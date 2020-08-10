@@ -199,7 +199,7 @@ class HashMap:
                 continue
             else:
                 for nodes in link:
-                    keys.set_at_index(j,nodes.key)
+                    keys.set_at_index(j,150)
                     j=j+1
         return keys
 
