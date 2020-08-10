@@ -166,7 +166,7 @@ class HashMap:
         for x in range(new_capacity):
             newtable.append(LinkedList())
        #get all the linked list in dynamic array, and get their nodes. Insert into keylist
-        for x in range(0,self.capacity):
+        for x in range(self.capacity-1,-1,-1):
             linked=self.buckets.get_at_index(x)
             if self.is_empty_linked(linked)==True:
                 continue
@@ -178,9 +178,6 @@ class HashMap:
         self.buckets = newtable
        #use the nodes in keylist to insert into new dynamic array
         for node in keylist:
-            # hash=self.hash_function(node.key)
-            # index=hash%new_capacity
-            # newtable.get_at_index(index).insert(node.key,node.value)
             self.put(node.key,node.value)
 
 
@@ -199,7 +196,7 @@ class HashMap:
                 continue
             else:
                 for nodes in link:
-                    keys.set_at_index(j,150)
+                    keys.set_at_index(j,nodes.key)
                     j=j+1
         return keys
 
@@ -401,3 +398,6 @@ if __name__ == "__main__":
     m.remove('100')
     m.resize_table(2)
     print(m.get_keys())
+
+
+
