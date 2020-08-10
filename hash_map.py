@@ -189,8 +189,19 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-
-        return DynamicArray()
+        j=0
+        keys=DynamicArray(None)
+        for i in range (0,self.size):
+            keys.append(None)
+        for i in range(0, self.buckets.length()):
+            link = self.buckets.get_at_index(i)
+            if link.length() == 0:
+                continue
+            else:
+                for nodes in link:
+                    keys.set_at_index(j,nodes.key)
+                    j=j+1
+        return keys
 
 
 # BASIC TESTING
@@ -376,17 +387,17 @@ if __name__ == "__main__":
         print(capacity, result, m.size, m.capacity, round(m.table_load(), 2))
 
 
-    # print("\nPDF - get_keys example 1")
-    # print("------------------------")
-    # m = HashMap(10, hash_function_2)
-    # for i in range(100, 200, 10):
-    #     m.put(str(i), str(i * 10))
-    # print(m.get_keys())
-    #
-    # m.resize_table(1)
-    # print(m.get_keys())
-    #
-    # m.put('200', '2000')
-    # m.remove('100')
-    # m.resize_table(2)
-    # print(m.get_keys())
+    print("\nPDF - get_keys example 1")
+    print("------------------------")
+    m = HashMap(10, hash_function_2)
+    for i in range(100, 200, 10):
+        m.put(str(i), str(i * 10))
+    print(m.get_keys())
+
+    m.resize_table(1)
+    print(m.get_keys())
+
+    m.put('200', '2000')
+    m.remove('100')
+    m.resize_table(2)
+    print(m.get_keys())
