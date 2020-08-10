@@ -158,27 +158,40 @@ class HashMap:
         """
         TODO: Write this implementation
         """
+
+
         if new_capacity==0:
             return
         newtable=DynamicArray()
-        keylist=LinkedList()
-        #create a new empty dynamic array with new capacity
+        nodetable = DynamicArray()
+        #keylist=LinkedList()
+        #create a new empty dynamic arrays
         for x in range(new_capacity):
             newtable.append(LinkedList())
+        for x in range(0, self.size):
+            nodetable.append(None)
+        linkstart=0
        #get all the linked list in dynamic array, and get their nodes. Insert into keylist
         for x in range(self.capacity-1,-1,-1):
             linked=self.buckets.get_at_index(x)
             if self.is_empty_linked(linked)==True:
                 continue
-            else:
-                for node in linked:
-                    keylist.insert(node.key,node.value)
+            currentlink=linkstart+linked.length()-1
+            linkstart=currentlink+1
+            for node in linked:
+            #     #     keylist.insert(node.key,node.value)
+                nodetable.set_at_index(currentlink,node)
+                currentlink=currentlink-1
+
+
         self.size = 0
         self.capacity =new_capacity
         self.buckets = newtable
        #use the nodes in keylist to insert into new dynamic array
-        for node in keylist:
-            self.put(node.key,node.value)
+        for index in range(0,nodetable.length()):
+            currentnode=nodetable.get_at_index(index)
+            self.put(currentnode.key,currentnode.value)
+
 
 
 
@@ -260,18 +273,18 @@ if __name__ == "__main__":
     print(m.size, m.capacity)
 
 
-    print("\nPDF - clear example 2")
-    print("---------------------")
-    m = HashMap(50, hash_function_1)
-    print(m.size, m.capacity)
-    m.put('key1', 10)
-    print(m.size, m.capacity)
-    m.put('key2', 20)
-    print(m.size, m.capacity)
-    m.resize_table(100)
-    print(m.size, m.capacity)
-    m.clear()
-    print(m.size, m.capacity)
+    # print("\nPDF - clear example 2")
+    # print("---------------------")
+    # m = HashMap(50, hash_function_1)
+    # print(m.size, m.capacity)
+    # m.put('key1', 10)
+    # print(m.size, m.capacity)
+    # m.put('key2', 20)
+    # print(m.size, m.capacity)
+    # m.resize_table(100)
+    # print(m.size, m.capacity)
+    # m.clear()
+    # print(m.size, m.capacity)
 
 
     print("\nPDF - put example 1")
@@ -354,13 +367,13 @@ if __name__ == "__main__":
     m.remove('key4')
     #
     #
-    print("\nPDF - resize example 1")
-    print("----------------------")
-    m = HashMap(20, hash_function_1)
-    m.put('key1', 10)
-    print(m.size, m.capacity, m.get('key1'), m.contains_key('key1'))
-    m.resize_table(30)
-    print(m.size, m.capacity, m.get('key1'), m.contains_key('key1'))
+    # print("\nPDF - resize example 1")
+    # print("----------------------")
+    # m = HashMap(20, hash_function_1)
+    # m.put('key1', 10)
+    # print(m.size, m.capacity, m.get('key1'), m.contains_key('key1'))
+    # m.resize_table(30)
+    # print(m.size, m.capacity, m.get('key1'), m.contains_key('key1'))
 
 
     print("\nPDF - resize example 2")
