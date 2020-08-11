@@ -97,6 +97,7 @@ class MinHeap:
             raise MinHeapException
             return
         parent_index=0
+        print(parent)
         parent=self.get_min()
         self.heap.swap(parent_index,self.heap.length()-1)
         self.heap.pop()
