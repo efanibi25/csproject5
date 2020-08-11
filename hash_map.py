@@ -164,7 +164,6 @@ class HashMap:
             return
         newtable=DynamicArray()
         nodetable = DynamicArray()
-        #keylist=LinkedList()
         #create a new empty dynamic arrays
         for x in range(new_capacity):
             newtable.append(LinkedList())
@@ -179,7 +178,6 @@ class HashMap:
             currentlink=linkstart+linked.length()-1
             linkstart=currentlink+1
             for node in linked:
-            #     #     keylist.insert(node.key,node.value)
                 nodetable.set_at_index(currentlink,node)
                 currentlink=currentlink-1
 
@@ -187,7 +185,7 @@ class HashMap:
         self.size = 0
         self.capacity =new_capacity
         self.buckets = newtable
-       #use the nodes in keylist to insert into new dynamic array
+       #reverse order because of how insert works by replacing the head
         for index in range(nodetable.length()-1,-1,-1):
             currentnode=nodetable.get_at_index(index)
             self.put(currentnode.key,currentnode.value)

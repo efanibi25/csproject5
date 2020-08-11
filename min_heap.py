@@ -48,7 +48,18 @@ class MinHeap:
         """
         TODO: Write this implementation
         """
-        pass
+        end_index=self.heap.length()
+        parent_index=((end_index-1)//2)
+        if end_index==0:
+            self.heap.append(node)
+        else:
+            self.heap.append(node)
+            while self.heap.get_at_index(end_index)<self.heap.get_at_index(parent_index):
+                self.heap.swap(end_index,parent_index)
+                end_index=parent_index
+                if end_index==0:
+                    break
+                parent_index=(end_index-1)//2
 
     def get_min(self) -> object:
         """
@@ -88,29 +99,29 @@ if __name__ == '__main__':
         h.add(value)
         print(h)
 
-
-    print("\nPDF - get_min example 1")
-    print("-----------------------")
-    h = MinHeap(['fish', 'bird'])
-    print(h)
-    print(h.get_min(), h.get_min())
-
-
-    print("\nPDF - remove_min example 1")
-    print("--------------------------")
-    h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])
-    while not h.is_empty():
-        print(h, end=' ')
-        print(h.remove_min())
-
-
-    print("\nPDF - build_heap example 1")
-    print("--------------------------")
-    da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
-    h = MinHeap(['zebra', 'apple'])
-    print(h)
-    h.build_heap(da)
-    print(h)
-    da.set_at_index(0, 500)
-    print(da)
-    print(h)
+    #
+    # print("\nPDF - get_min example 1")
+    # print("-----------------------")
+    # h = MinHeap(['fish', 'bird'])
+    # print(h)
+    # print(h.get_min(), h.get_min())
+    #
+    #
+    # print("\nPDF - remove_min example 1")
+    # print("--------------------------")
+    # h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])
+    # while not h.is_empty():
+    #     print(h, end=' ')
+    #     print(h.remove_min())
+    #
+    #
+    # print("\nPDF - build_heap example 1")
+    # print("--------------------------")
+    # da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
+    # h = MinHeap(['zebra', 'apple'])
+    # print(h)
+    # h.build_heap(da)
+    # print(h)
+    # da.set_at_index(0, 500)
+    # print(da)
+    # print(h)
