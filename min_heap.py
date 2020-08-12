@@ -1,7 +1,7 @@
 # Course: CS261 - Data Structures
 # Assignment: 5
-# Student:
-# Description:
+# Student:Tobi Fanibi
+# Description:minheap object Class. Heap is implemented on top of a DynamicArray
 
 
 # Import pre-written DynamicArray and LinkedList classes
@@ -45,7 +45,7 @@ class MinHeap:
 
     def add(self, node: object) -> None:
         """
-        TODO: Write this implementation
+        Add a new element to heap and perculate it down
         """
         end_index=self.heap.length()
         parent_index=((end_index-1)//2)
@@ -62,13 +62,16 @@ class MinHeap:
 
     def get_min(self) -> object:
         """
-        TODO: Write this implementation
+        Return the top of the minheap if empty return None
         """
         if self.is_empty()==True:
             return None
         return self.heap.get_at_index(0)
 
     def find_min_child(self,index1, index2):
+        """
+        Find the minumum index between two or one or No children. If No children returns None
+        """
         try:
             min1=self.heap.get_at_index(index1)
         except:
@@ -91,7 +94,7 @@ class MinHeap:
 
     def remove_min(self) -> object:
         """
-        TODO: Write this implementation
+        Remove the top of the minheap and perculate the replacement value(last value) down
         """
         if self.is_empty():
             raise MinHeapException
@@ -117,46 +120,16 @@ class MinHeap:
         return parent
 
 
-
-
-    # def build_heap(self, da: DynamicArray) -> None:
-    #     """
-    #     TODO: Write this implementation
-    #     """
-    #     if da.length()==0:
-    #         raise MinHeapException
-    #         return
-    #     self.heap = da
-    #     counter=self.heap.length()-1
-    #     self.build_heap_helper(counter)
-
-
-    # def build_heap_helper(self,counter):
-    #     print("dds")
-    #     if counter<1:
-    #         return
-    #     no_leaf=(counter//2)-1
-    #     self.heap.swap(counter,0)
-        # counter=counter
-        # parent_index=0
-        # min_child=self.find_min_child(1,2)
-        # while min_child<=counter:
-        #     if self.heap.get_at_index(min_child)>self.heap.get_at_index(parent_index):
-        #         break
-        #     self.heap.swap(min_child, parent_index)
-        #     parent_index = min_child
-        #     if parent_index == None:
-        #         break
-        #     min_child = self.find_min_child((parent_index * 2) + 1, (parent_index * 2) + 2)
-        #     if min_child==None:
-        #         break
-        # return self.build_heap_helper(counter-1)
-
     def build_heap(self, da: DynamicArray) -> None:
         """
         Sort and Unsorted array to make a minheap
         """
-        da2=da
+        da2=DynamicArray()
+        #We want da to not change so we need to create a hard copy of da, not tied to the same memory address
+        #this operation is n
+        for x in range(0,da.length()):
+            da_int=da.get_at_index(x)
+            da2.append(da_int)
         if da2.length()==0:
             raise MinHeapException
             return
@@ -165,11 +138,15 @@ class MinHeap:
         #unlock default heap_sort current starts at the last leaf node. So only that section is
         #heap_sorted instead of the entire minheap
         current=(end//2)-1
+        #this is n, so 2n or O(n) with the base removed
         self.build_heap_helper(current)
 
 
 
     def build_heap_helper(self, current):
+        """
+        Helper function for build heap
+        """
         if current==-1:
             return
         parent_index=current

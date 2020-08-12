@@ -1,7 +1,8 @@
 # Course: CS261 - Data Structures
 # Assignment: 5
-# Student:
-# Description:
+# Student:Tobi Fanibi
+# Description:hashmap object class with linkedlist objects in indexes. Linkedlist provide collision control for calulated indexes from hashes.
+
 
 
 # Import pre-written DynamicArray and LinkedList classes
@@ -58,7 +59,7 @@ class HashMap:
 
     def clear(self) -> None:
         """
-        TODO: Write this implementation
+        clears the hash map. By setting every index to an empty linkedlist
         """
         clear=LinkedList()
         size=self.capacity
@@ -69,7 +70,7 @@ class HashMap:
 
     def get(self, key: str) -> object:
         """
-        TODO: Write this implementation
+        Returns the value of a key, if not in hashmap returns None
         """
         if self.contains_key(key)==False:
             return None
@@ -108,7 +109,7 @@ class HashMap:
 
     def remove(self, key: str) -> None:
         """
-        TODO: Write this implementation
+        Remove a key by finding index and then removing that value in the linked list. If none existant returns None
         """
         hash = self.hash_function(key)
         size = self.capacity
@@ -126,7 +127,8 @@ class HashMap:
 
     def contains_key(self, key: str) -> bool:
         """
-        TODO: Write this implementation
+        Find if hash map contains a key, buy finding index and then checking that linked list. If not found returns False, otherwise
+        returns true
         """
         hash = self.hash_function(key)
         size = self.capacity
@@ -156,7 +158,7 @@ class HashMap:
 
     def resize_table(self, new_capacity: int) -> None:
         """
-        TODO: Write this implementation
+        resizes the hashmap and recalculates the indexes
         """
 
 
@@ -195,7 +197,7 @@ class HashMap:
 
     def get_keys(self) -> DynamicArray:
         """
-        TODO: Write this implementation
+        Creates a array of all the keys
         """
         j=0
         keys=DynamicArray(None)
