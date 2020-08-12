@@ -84,9 +84,9 @@ class MinHeap:
             return index1
         elif min1==None and min2!=None:
             return index2
-        elif min1<min2:
+        elif min1<=min2:
             return index1
-        elif min2<=min1:
+        elif min2<min1:
             return index2
 
     def remove_min(self) -> object:
@@ -119,11 +119,73 @@ class MinHeap:
 
 
 
+    # def build_heap(self, da: DynamicArray) -> None:
+    #     """
+    #     TODO: Write this implementation
+    #     """
+    #     if da.length()==0:
+    #         raise MinHeapException
+    #         return
+    #     self.heap = da
+    #     counter=self.heap.length()-1
+    #     self.build_heap_helper(counter)
+
+
+    # def build_heap_helper(self,counter):
+    #     print("dds")
+    #     if counter<1:
+    #         return
+    #     no_leaf=(counter//2)-1
+    #     self.heap.swap(counter,0)
+        # counter=counter
+        # parent_index=0
+        # min_child=self.find_min_child(1,2)
+        # while min_child<=counter:
+        #     if self.heap.get_at_index(min_child)>self.heap.get_at_index(parent_index):
+        #         break
+        #     self.heap.swap(min_child, parent_index)
+        #     parent_index = min_child
+        #     if parent_index == None:
+        #         break
+        #     min_child = self.find_min_child((parent_index * 2) + 1, (parent_index * 2) + 2)
+        #     if min_child==None:
+        #         break
+        # return self.build_heap_helper(counter-1)
+
     def build_heap(self, da: DynamicArray) -> None:
         """
-        TODO: Write this implementation
+        Sort and Unsorted array to make a minheap
         """
-        pass
+        da2=da
+        if da2.length()==0:
+            raise MinHeapException
+            return
+        self.heap = da2
+        end=self.heap.length()-1
+        #unlock default heap_sort current starts at the last leaf node. So only that section is
+        #heap_sorted instead of the entire minheap
+        current=(end//2)-1
+        self.build_heap_helper(current)
+
+
+
+    def build_heap_helper(self, current):
+        if current==-1:
+            return
+        parent_index=current
+        min_child=self.find_min_child((parent_index * 2)+1,(parent_index * 2) + 2)
+        while min_child!=None:
+            if self.heap.get_at_index(parent_index)<self.heap.get_at_index(min_child):
+                break
+            self.heap.swap(min_child,parent_index)
+            parent_index=min_child
+            min_child=self.find_min_child((parent_index * 2)+1,(parent_index * 2) + 2)
+            if min_child==None:
+                break
+        self.build_heap_helper(current-1)
+
+
+
 
 
 # BASIC TESTING
@@ -155,20 +217,19 @@ if __name__ == '__main__':
 
     print("\nPDF - remove_min example 1")
     print("--------------------------")
-    h = MinHeap([0, 1, 3, 2, 13, 15, 20, 5, 40, 18, 15])
+    h = MinHeap([13,15,15,20,18,16,24,28,32])
     while not h.is_empty():
         print(h, end=' ')
         print(h.remove_min())
-   # h2=MinHeap([])
-    #
-    #
-    # print("\nPDF - build_heap example 1")
-    # print("--------------------------")
-    # da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
-    # h = MinHeap(['zebra', 'apple'])
-    # print(h)
-    # h.build_heap(da)
-    # print(h)
-    # da.set_at_index(0, 500)
-    # print(da)
-    # print(h)
+
+    print("\nPDF - build_heap example 1")
+    print("--------------------------")
+    da = DynamicArray([100, 20, 6, 200, 90, 150, 300])
+    #da = DynamicArray([32,12,2,8,16,20,24,40,4])
+    h = MinHeap(['zebra', 'apple'])
+    print(h)
+    h.build_heap(da)
+    print(h)
+    da.set_at_index(0, 500)
+    print(da)
+    print(h)
