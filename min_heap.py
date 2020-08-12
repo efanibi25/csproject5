@@ -86,7 +86,7 @@ class MinHeap:
             return index2
         elif min1<min2:
             return index1
-        elif min2<min1:
+        elif min2<=min1:
             return index2
 
     def remove_min(self) -> object:
@@ -98,8 +98,9 @@ class MinHeap:
             return
         parent_index=0
         parent=self.get_min()
-        print(parent)
-        print(self)
+        #parent=5
+        #print(parent)
+        #print(self)
         self.heap.swap(parent_index,self.heap.length()-1)
         self.heap.pop()
         if self.is_empty():
@@ -154,10 +155,11 @@ if __name__ == '__main__':
 
     print("\nPDF - remove_min example 1")
     print("--------------------------")
-    h = MinHeap([1, 10, 2, 9, 3, 8, 4, 7, 5, 6])
+    h = MinHeap([0, 1, 3, 2, 13, 15, 20, 5, 40, 18, 15])
     while not h.is_empty():
         print(h, end=' ')
         print(h.remove_min())
+   # h2=MinHeap([])
     #
     #
     # print("\nPDF - build_heap example 1")
